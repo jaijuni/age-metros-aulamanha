@@ -1,9 +1,17 @@
 package com.digitalhouse.obtenerdiploma.dto;
 
+import java.util.Objects;
+
 public class CertificateDTO{
   private String message;
   private Double average;
   private StudentDTO student;
+
+  public CertificateDTO(String message, Double average, StudentDTO student) {
+    this.message = message;
+    this.average = average;
+    this.student = student;
+  }
 
   public CertificateDTO() {
   }
@@ -34,5 +42,13 @@ public class CertificateDTO{
 
   public void setStudent(StudentDTO student) {
     this.student = student;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    CertificateDTO that = (CertificateDTO) o;
+    return Objects.equals(message, that.message) && Objects.equals(average, that.average) && Objects.equals(student, that.student);
   }
 }

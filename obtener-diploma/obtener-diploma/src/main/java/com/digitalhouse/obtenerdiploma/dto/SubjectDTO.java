@@ -15,6 +15,11 @@ public class SubjectDTO {
   @Min(value=0)
   private Integer note;
 
+  public SubjectDTO(String subject, Integer note) {
+    this.subject = subject;
+    this.note = note;
+  }
+
   public String getSubject() {
     return subject;
   }
