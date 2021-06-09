@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ public class CertificateServiceImplTest {
         //assert
         assertEquals(expectedAverage,testingCertificate.getAverage());
         assertEquals(expectedMessage,testingCertificate.getMessage());
+        assertNotEquals(null,testingCertificate);
     }
 
     @Test
@@ -52,8 +54,45 @@ public class CertificateServiceImplTest {
         //assert
         assertEquals(expectedAverage,testingCertificate.getAverage());
         assertEquals(expectedMessage,testingCertificate.getMessage());
+        assertNotEquals(null,testingCertificate);
 
+    }
 
+    @Test
+    public void shouldReturnAverageOfNotes(){
+        StudentDTO student = createStudentWithAverage8();
+        double expectedAverage = 8;
+
+        double average = certificateService.calculateAverage(student);
+
+        assertEquals(expectedAverage,average);
+        assertNotEquals(null,average);
+    }
+
+    @Test
+    public void shouldWriteDiploma(){
+        StudentDTO student = createStudentWithAverage8();
+
+        String expectedMessage = "MarcioSantana usted ha conseguido el promedio de " + 8.0;
+
+        String message = certificateService.writeDiploma(student);
+
+        assertEquals(expectedMessage,message);
+        assertNotEquals("Marcio usted ha consegudo el promedio de " + 8,message);
+    }
+
+    @Test
+    public void shouldWriteDiplomaWithHonors(){
+        StudentDTO student = createStudentWithHighAverage();
+
+        int sumNotes = student.getSubjects().stream().mapToInt(SubjectDTO::getNote).sum();
+        double average = sumNotes/student.getSubjects().size();
+
+        String expectedMessage = "¡Felicitaciones MarcioSantana! Usted tiene el gran promedio de " + average;
+        String message = certificateService.withHonors(average,student.getName());
+
+        assertEquals(expectedMessage,message);
+        assertNotEquals("Marcio usted ha consegudo el promedio de " + 8,message);
     }
 
     private StudentDTO createStudentWithHighAverage(){
