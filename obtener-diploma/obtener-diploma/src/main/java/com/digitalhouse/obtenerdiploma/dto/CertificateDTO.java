@@ -1,6 +1,6 @@
 package com.digitalhouse.obtenerdiploma.dto;
 
-public class CertificateDTO extends StudentDTO {
+public class CertificateDTO{
   private String message;
   private Double average;
   private StudentDTO student;
