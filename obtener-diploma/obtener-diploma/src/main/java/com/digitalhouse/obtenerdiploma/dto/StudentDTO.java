@@ -36,4 +36,11 @@ public class StudentDTO {
     public void setSubjects(List<SubjectDTO> subjects) {
         this.subjects = subjects;
     }
+
+    public StudentDTO(@NotNull(message = "The name cannot be null") @Size(min = 8, max = 50) String name, @Valid List<SubjectDTO> subjects) {
+        this.name = name;
+        this.subjects = subjects;
+    }
+
+
 }

@@ -31,4 +31,12 @@ public class SubjectDTO {
     this.note = note;
   }
 
+  public SubjectDTO() {
+  }
+
+  public SubjectDTO(@NotNull(message = "The name cannot be null") @Pattern(regexp = "^[a-zA-Z -,.']+$") @Size(min = 8, max = 50) String subject, @NotNull(message = "The note cannot be null") @Max(value = 10) @Min(value = 0) Integer note) {
+    this.subject = subject;
+    this.note = note;
+  }
+
 }
